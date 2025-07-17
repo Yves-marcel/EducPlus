@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\exercices;
+use App\Models\enseignants;
+use App\Models\niveau_enseignants;
+
 
 class User extends Authenticatable
 {
@@ -19,9 +23,34 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'firstname',
         'email',
+        'photo',
+        'phone',
+        'birth_date',
+        'address',
+        'city',
+        'country',
+        'email_verified_at',
+        'role',
         'password',
     ];
+    public function exercices()
+    {
+        return $this->hasMany(exercices::class);
+    }
+    public function enseignants()
+    {
+        return $this->hasMany(enseignants::class);
+    }
+    public function niveau_enseignants()
+    {
+        return $this->hasMany(niveau_enseignants::class);
+    }
+    public function reponses()
+    {
+        return $this->hasMany(reponses::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
